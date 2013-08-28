@@ -2,12 +2,12 @@ section#collections.col-12
   .container
     h3.taped Queries
     .content
-      p sparse.Collections do not differ significantly in functionality from Backbone.Collection but acceptadditional ParseAPI specific options
+      p sparse.Collections do not differ significantly in functionality from Backbone.Collection but accept additional Parse API specific options
       to allow queries
       p
         strong Usage Example
       pre
-        = "var TestCompanies = sparse.Collection.extend({\n  __parse_classname:\"TestCompanies\"\n});\nvar collection = new TestCompanies();\ncollection.query({\"active\":true},{\n  limit: 100,\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)) + \n    \"Rows on Server: \"+collection.count());\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
+        = "var TestCompanies = sparse.Collection.extend({\n  className:\"TestCompanies\"\n});\nvar collection = new TestCompanies();\ncollection.query({\"active\":true},{\n  limit: 100,\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)) + \n    \"Rows on Server: \"+collection.count());\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
     .table-responsive
       table.table.table-striped.table-hover
         thead

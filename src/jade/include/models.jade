@@ -6,7 +6,7 @@ section#models.col-12
       p
         strong Usage Example
       pre
-        = "var MyObject = sparse.Model.extend({\n  __parse_classname:\"MyObject\"\n});\nvar record = new MyObject();\nrecord.save({name:\"Record One\", description:\"This record created with sParse\"},{\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)));\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
+        = "var MyObject = sparse.Model.extend({\n  className:\"MyObject\"\n});\nvar record = new MyObject();\nrecord.save({name:\"Record One\", description:\"This record created with sParse\"},{\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)));\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
     form.form-inline(role="form")
       .row
         .form-group.col-3
