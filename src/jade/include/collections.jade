@@ -1,0 +1,46 @@
+section#collections.col-12
+  .container
+    h3.taped Queries
+    .content
+      p sparse.Collections do not differ significantly in functionality from Backbone.Collection but acceptadditional ParseAPI specific options
+      to allow queries
+      p
+        strong Usage Example
+      pre
+        = "var TestCompanies = sparse.Collection.extend({\n  __parse_classname:\"TestCompanies\"\n});\nvar collection = new TestCompanies();\ncollection.query({\"active\":true},{\n  limit: 100,\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)) + \n    \"Rows on Server: \"+collection.count());\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
+    .table-responsive
+      table.table.table-striped.table-hover
+        thead
+          tr
+            th Company Name
+            th Tagline
+            th Contact
+            th Active
+        tbody
+          tr.query-usage-info
+            td(colspan="4") 
+              h4 Load Default Data Into Parse API to Populate 
+              span (see Batch Operations Demo above)
+    form.form-inline(role="form")
+      .form-group.col-4
+        label(for="active") Active:
+        select#active.form-control(name="active")
+          option(selected="true")
+          option true
+          option false
+      .form-group.col-4
+        label(for="limit") Limit:
+        select#limit.form-control(name="limit")
+          each opt in [100,75,50,25,15,10,5]
+            unless opt === 25
+              option=opt
+            else
+              option(selected="true")=opt
+      .form-group.col-12.pull-right
+        button#submit_query.btn.api-btn(disabled="true") Submit Query
+  script#textCompaniesItem(type="text/template")
+    tr
+      td {{name}}
+      td {{tagline}}
+      td {{contact_email}}
+      td {{active}}

@@ -1,0 +1,23 @@
+section#batch.col-12
+  .container
+    h3.taped Batch Operations
+    .content
+      p Perform bulk data operations with a single request with the 
+        a(href="https://parse.com/docs/rest#objects-batch", target="_blank") Parse API Batch Operation
+        . The Basic Service Plan in the Parse API limits Batches to 50 items, to help with this, 
+        strong sparse.Batch 
+        will automatically segment the Collection into individual requests of 50 records or less. You can set the sparse.BATCH_SIZE setting to increase or decrease the Batch request size.
+      p
+        strong JSON Format:
+      pre
+        ="{\n  \"ClassName\":[\n    {row data},\n    ...\n  ],\n  ...\n}"
+      p
+        strong Usage Example
+      pre
+        = "batch = new sparse.Batch();\nbatch.add(myCollection.models);\nbatch.exec({\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)));\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
+    form.form(role="form")
+      .field-group
+        textarea#data.form-control(placeholder="Copy & Paste JSON Data")
+      .field-group
+        button#load.btn.btn-default Load Default Data
+        button#send.btn.btn-primary.api-btn.pull-right(disabled=true) Send to Parse API

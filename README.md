@@ -1,4 +1,4 @@
 sparse-demo
 ===========
 
-Demo Web Service for sParse: A Parse API for Backbone
+Sources for the Demo Web Service that is included in the [sParse](https://github.com/vancarney/sparse) repo 

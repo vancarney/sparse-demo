@@ -1,0 +1,9 @@
+extends ../include/layout
+append yield
+  .col-12("data-viewid"="index")
+    include ../include/models
+    include ../include/users
+    include ../include/batch
+    include ../include/collections
+    include ../include/coming_soon
+    button#demo_reset.btn.btn-large.btn-block.btn-danger.col-12(disabled="true") Reset Data on Server

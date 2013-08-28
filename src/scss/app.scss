@@ -1,0 +1,221 @@
+@import "compass/css3";
+$bgcolor: #F8F8F8;
+
+html,
+body
+{
+  -webkit-transform: translate3d(0px,0px,0px);
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  padding-top: 0px !important;
+  margin-top: -20px !important;
+  
+  
+  .taped
+  {
+    display: inline-block;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    line-height: -5px;
+    position: relative; 
+    background-color: #a90329;
+    @include filter-gradient(#a90329, #6d0019, vertical);
+    $experimental-support-for-svg: true;
+    @include background-image(linear-gradient(top,  #a90329 46%,#8f0222 48%,#6d0019 72%));
+    color: #FFF;
+    letter-spacing: 0.23em;
+    font-weight: 100;
+    text-shadow: -1px -1px 3px #e5e5e5, 1px 0px 3px #333,0px 0px 5px #FFF;
+    @include transform-style( preserve-3d );
+    @include rotateZ(-4deg);
+    padding:6px;
+    border-top: 1px solid #FF0900;
+    border-left: 1px solid #FF0900;
+    @include box-shadow( 1px 1px 2px #555);
+  }
+
+  header
+  {
+    color: #666;
+    background-color: $bgcolor;
+    padding-top:  12px;
+    padding-left: 12px;
+    
+    .title
+    {
+      font-size: 3.2em;
+      font-weight: 200; 
+    }
+
+  } // -- end header
+  
+  #main.container
+  {
+    padding-top: 40px;
+    min-height: 800px;
+    
+    
+    .title
+    {
+      color: #666;
+      margin-top: 2px !important;
+      padding-left: 12px;
+      padding-top: 4px !important;
+    }
+    
+    .taped
+    {
+      @media (max-width: 480px) and (orientation:portrait)
+      {
+        left: -40px !important;
+      }
+    }
+    
+    .alert.alert-info strong
+    {
+      padding-right: 12px;
+      font-weight: 900;
+    }
+    
+    #credentials
+    {
+      .form-control
+      {
+        margin-bottom: 8px;
+      }
+    }
+      
+    section
+    {
+      display: block;
+      background-color: $bgcolor;
+      border: 1px #dfdfdf solid;
+      border-radius: 2px;
+      margin: none;
+      margin-bottom: 60px !important;
+      padding: 12px;
+      padding-top: 0px !important;
+      
+      &:last-of-kind
+      {
+        margin-bottom: 0px !important;
+      }
+      
+      .taped
+      {
+        top: -40px;
+      }
+      
+      .container>div
+      {
+        text-align: left;
+      }
+      
+      table
+      {
+        width: 100%;
+        border: 1px solid #ccc;
+
+        .query-usage-info
+        {
+          text-align: center;
+          color: #ccc;
+          span
+          {
+            display: inline-block;
+            margin-bottom: 10px !important;
+            font-weight: 700;
+          }
+        }
+
+      } // -- end table
+      
+      form
+      {
+        padding: none !important;
+        
+        .row
+        {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        
+        .form-group
+        {
+          margin-top: 8px; 
+          span.form-control
+          {
+            display: block;
+            min-width: 160px !important;
+            overflow: none;
+          }
+          
+          
+          #user_password
+          {
+            display: block;
+            min-width: 238px !important;
+          }
+          
+          #submit_query
+          {
+            position: relative; 
+            top: 20px;
+          }
+        }
+
+        textarea
+        {
+          display: block;
+          color: #999;
+          width: 100%;
+          min-height: 400px;
+          resize: none;
+          overflow: auto;
+          
+          &::-webkit-input-placeholder {
+             color: #ccc;
+             font-size: 2em;
+             font-weight:200;
+             text-align: center;
+             padding-top: 170px;
+          }
+          
+          &:-moz-placeholder { 
+             color: #999;
+             font-size: 2em;
+             font-weight:200;
+             text-align: center;
+             padding-top: 170px; 
+          }
+          
+          &::-moz-placeholder {  
+             color: #999;
+             font-size: 2em;
+             font-weight:200;
+             text-align: center;
+             padding-top: 170px; 
+          }
+          
+          &:-ms-input-placeholder {  
+             color: #999;
+             font-size: 2em;
+             font-weight:200;
+             text-align: center;
+             padding-top: 170px;
+          }
+        } // -- end textarea
+        
+      }
+
+    } // -- end section
+  } // -- end #main.container
+  
+  footer
+  {
+    border-top: 1px #dfdfdf solid;
+    margin-top: 40px !important;
+    background-color: $bgcolor;
+    min-height:120px;
+  } // -- end footer
+  
+} // -- end HTML/Body

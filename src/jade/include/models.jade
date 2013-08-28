@@ -1,0 +1,25 @@
+section#models.col-12
+  .container
+    h3.taped Record Lifecycle
+    .content
+      p sparse.Model represents a single record row within a collection and is the base unit of the Sparse API. Models may be saved, updated, deleted and read from the Sparse API.
+      p
+        strong Usage Example
+      pre
+        = "var MyObject = sparse.Model.extend({\n  __parse_classname:\"MyObject\"\n});\nvar record = new MyObject();\nrecord.save({name:\"Record One\", description:\"This record created with sParse\"},{\n  success: function(m, r, o) {\n   return console.log(\"Parse Response: \" + (JSON.stringify(r)));\n  },\n  error: function(m, r, o) {\n    return console.log(m);\n  }\n});"
+    form.form-inline(role="form")
+      .row
+        .form-group.col-3
+          label ObjectId:
+          span#model_objectId.form-control(name="model_objectId", data-text="model.objectId")
+        .form-group.col-3
+          label(for="lifecycle_m_name") Name Field:
+          input#model_name.form-control(name="model_name", type="text", placeholder="Record Name", data-value="model.name")
+        .form-group.col-6
+          label(for="lifecycle_m_desc") Description Field:
+          input#model_description.form-control(name="model_description", type="text", placeholder="Description", data-value="model.description")
+      .row
+        .form-group.col-12.pull-right
+          button#create_model.btn.api-btn Create
+          button#update_model.btn.api-btn(disabled="true") Update
+          button#destroy_model.btn.api-btn(disabled="true") Delete
