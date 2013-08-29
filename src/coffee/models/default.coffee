@@ -34,10 +34,10 @@ if (typeof exports != 'undefined')
         _.each @attributes, (v,k)=>
           # each attribute should be an Array of Objects .. let's put those intocollections
           @[className = "#{k.charAt(0).toUpperCase()}#{k.substring 1, k.length}"] = @nestCollection className, new (sparse.Collection.extend 
-            __parse_classname : className
+            className : className
             # each collection should have a distinct model that share's it's Parse ClassName
             model: sparse.Model.extend 
-              __parse_classname : className
+              className : className
           # Apply the Object Array to our Collection
           )(v)
 )(jQuery)
