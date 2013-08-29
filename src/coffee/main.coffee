@@ -21,9 +21,7 @@ SparseDemo = global.SparseDemo = {} if !global.SparseDemo
     new (SparseDemo.BaseView.extend
       el:"body"
       subviews:
-        '#credentialsModal':class CredentialsModal extends Backbone.View
-          initialize:->
-            rivets.bind @el, access: @model
+        '#credentialsModal':class CredentialsModal extends SparseDemo.BaseView
           model:new (Backbone.Model.extend
             defaults:
               app_id:""
@@ -33,19 +31,25 @@ SparseDemo = global.SparseDemo = {} if !global.SparseDemo
             'click #close':'hide'
             'click #save':'setCredentials'
           hide:(evt)->
-            evt.preventDefault()
+            evt.preventDefault() if evt
+            @__rv.unbind()
+            @__parent.off 'authOK'
+            @__parent.off 'authFail'
             @$el.modal 'hide'
             false
           show:->
+            @__rv = rivets.bind @el, access:@model
+            @model.clear()
+            @__parent.on 'authOK', => @hide()
+            @__parent.on 'authFail', => @model.clear()
             @$el.css 'top', $(window).scrollTop()
             @$el.modal 'show'
           toggle:->
             @$el.modal 'toggle'
           setCredentials:(evt)->
             evt.preventDefault()
-            # console.log @model.attributes
-            # @trigger 'credentialsSaved', @model.attributes
-            # false
+            @trigger 'credentialsSaved', @model.attributes
+            false
           init:(o)->
       getAPIHeaders:->
         $.ajax
@@ -58,13 +62,18 @@ SparseDemo = global.SparseDemo = {} if !global.SparseDemo
             else
               @setCredentials app_id, rest_key
       childrenComplete : ->
+        @['#credentialsModal'].on 'credentialsSaved', ((d)=> @setCredentials d.app_id, d.rest_key)
         @delegateEvents()
       getCredentials : ->
         return null if typeof (appId = (sparse.APP_ID || $.cookie 'PARSE_APP_ID')) == 'undefined' or typeof (restKey = (sparse.REST_KEY || $.cookie 'PARSE_REST_KEY')) == 'undefined'
         { app_id   : appId, rest_key : restKey}
       setCredentials:(appId, restKey)->
-        $.cookie 'PARSE_APP_ID',   sparse.APP_ID    = appId
-        $.cookie 'PARSE_REST_KEY', sparse.REST_KEY  = restKey
+        if "#{appId}#{restKey}".match /^[a-z0-9]{80}$/i
+          $.cookie 'PARSE_APP_ID',   sparse.APP_ID    = appId 
+          $.cookie 'PARSE_REST_KEY', sparse.REST_KEY  = restKey
+          @trigger 'authOK'
+        else
+          @trigger 'authFail'
       unsetCredentials : ->
         $.cookie 'PARSE_APP_ID', sparse.APP_ID = null
         $.cookie 'PARSE_REST_KEY', sparse.REST_KEY = null
@@ -77,7 +86,7 @@ SparseDemo = global.SparseDemo = {} if !global.SparseDemo
         if (c = @getCredentials()) == null
           @getAPIHeaders()
         else
-          @setCredentials c.app_id, c.rest_key 
+          @setCredentials c.app_id, c.rest_key
         @model = o.model if o? and o.model
         @createView() 
     )     

@@ -15,6 +15,7 @@ SparseDemo = global.SparseDemo = {} if !global.SparseDemo
         init:(o)->
           @events = _.extend @events, ModelForm.__super__.events
           @delegateEvents()
+          @model.set @__defaults 
           @model.on 'change', =>
             @$el.find('#create_model').attr( 'disabled', !(n=@model.isNew())
             ).siblings().attr 'disabled', n
