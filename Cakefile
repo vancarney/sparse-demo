@@ -44,9 +44,9 @@ coffeeCallback=()->
 
 # Callback From 'docco'
 doccoCallback=()->
-  
-sassCallback=()->
 
+sassCallback=()->
+  exec 'rm -rf ../sparse-pages/demo; cp -rf demo ../sparse-pages'
 # Begin Tasks
 # ## *build*
 # Compiles Sources
@@ -59,12 +59,19 @@ build = ()->
   # Enable coffee-script compiling
   launch 'coffee', (['-c', '-b', '-o' ].concat paths.coffee), coffeeCallback
   sass_opts = [ 'compile', "--sass-dir=#{paths.scss[1]}", "--css-dir=#{paths.scss[0]}"]
-  launch 'compass', sass_opts
+  launch 'compass', sass_opts, sassCallback
   # From Module 'jade'
   #  
   # exec "jade --path #{paths.jade[3]} -v --pretty --out #{paths.jade[2]}" 
   exec 'jade --path src/jade/include -v --pretty --out demo src/jade/templates'
 
+task 'run', 'run demo in stand-alone web server (uses connect)', ()-> run()
+run = ()->
+  connect(
+  ).use(connect.logger 'demo'
+  ).use(connect.static 'demo'
+  ).use( (req, res)-> res.end '' 
+  ).listen 3000
 
 # ## *watch*
 # watch project src folders and build on change
