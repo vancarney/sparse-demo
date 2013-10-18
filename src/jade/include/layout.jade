@@ -11,6 +11,8 @@ html
   body
     header.page-header
       h2.title sParse Demo
+      .pull-right.home-link
+        a(href="http://vancarney.github.io/sparse/") sParse Homepage
     #main.container
       block yield
       #credentialsModal.modal.fade(role="dialog")
@@ -20,8 +22,9 @@ html
                  h4.modal-title Parse API Access Credentials Required
               .modal-body
                 .alert.alert-info 
-                  strong Tip:
-                  span You can set these values in your Environment Vars.
+                  strong Need a Key?
+                  span
+                    a(href="https://www.parse.com/?#signup", target="_blank") You can get one here
                 form#credentials(role="form")
                   .form-group
                     input#app_id.form-control(name="app_id", type="text", placeholder="APP ID", data-value="access.app_id")

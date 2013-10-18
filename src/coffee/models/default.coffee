@@ -25,7 +25,7 @@ if (typeof exports != 'undefined')
     nestedCollection
   class SparseDemo.DefaultData extends sparse.Model
     url:->
-      '/data.json'
+      'data.json'
     sync:(method, model, options)->
       Backbone.Model.prototype.sync.call @, method, model, options
     initialize:(o)->
